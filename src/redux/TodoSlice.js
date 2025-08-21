@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 
+
 const initialState ={
     todos: [{
         id: 1,
@@ -16,9 +17,13 @@ const initialState ={
         name: "todo",
         initialState,
         reducers: {
+            addTask: (state,action) => {
+            return state.todos = [...state.todos, action.payload]
+            }
 
         }
 
     })
 
+    export const {addTask} = todoSlice.actions
 export const todoReducer = todoSlice.reducer

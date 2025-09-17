@@ -18,12 +18,18 @@ const initialState ={
         initialState,
         reducers: {
             addTask: (state,action) => {
-            return state.todos = [...state.todos, action.payload]
+                console.log(action)
+            state.todos = [...state.todos, action.payload]
+            return state
+            },
+            deleteTask: (state, action) => {
+                state.todos=state.todos.filter (todo => todo.id !== action.payload)
+                return state
             }
 
         }
 
     })
 
-    export const {addTask} = todoSlice.actions
+    export const {addTask, deleteTask} = todoSlice.actions
 export const todoReducer = todoSlice.reducer

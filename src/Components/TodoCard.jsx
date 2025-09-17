@@ -1,10 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteTask } from '../redux/TodoSlice'
 
 const TodoCard = ({todo}) => {
+  const dispatch = useDispatch()
   return (
     <div className='todocard' style={{backgroundColor: todo.isCompleted ? 'lightgreen' : 'lightcoral'}}>
         <h1>{todo.task}</h1>
         <h2>{todo.time}</h2>
+        <button onClick={() => dispatch(deleteTask(todo.id))}>Delete</button>
     </div>
   )
 }

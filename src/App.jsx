@@ -7,12 +7,14 @@ import TodoList from './Components/TodoList'
 import TodoForm from './Components/TodoForm'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [update, setUpdate] = useState(false)
+  const [updatedTask, setupdatedTask] = useState({})
+  console.log (updatedTask)
 
   return (
     <>
-    <TodoForm />
-    <TodoList />
+    <TodoForm update = {update} setUpdate={setUpdate} updatedTask = {updatedTask} />
+    <TodoList update = {update} setUpdate={setUpdate} setupdatedTask = {setupdatedTask} />
     </>
   )
 }

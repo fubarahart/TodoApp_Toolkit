@@ -8,7 +8,7 @@ const initialState ={
     todos: [{
         id: 1,
         task: "Learn Redux Toolkit",
-        time: "8:00 am",
+        time: "8:00",
         isCompleted: false
     }]
 }
@@ -25,11 +25,15 @@ const initialState ={
             deleteTask: (state, action) => {
                 state.todos=state.todos.filter (todo => todo.id !== action.payload)
                 return state
+            },
+            editTask: (state, {type, payload}) => {
+               state.todos = state.todos.map (todo => todo.id === payload.id? payload.data: todo)
+               return state
             }
 
         }
 
     })
 
-    export const {addTask, deleteTask} = todoSlice.actions
+    export const {addTask, deleteTask, editTask} = todoSlice.actions
 export const todoReducer = todoSlice.reducer

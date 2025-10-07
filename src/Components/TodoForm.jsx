@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addTask } from '../redux/TodoSlice'
+import { addTask, editTask } from '../redux/TodoSlice'
 
-const TodoForm = () => {
+const TodoForm = ({update, setupdate, updatedTask}) => {
   const [task, setTask] = useState("")
   const [time, setTime] = useState("")
   const dispatch = useDispatch()
 
   const handlesubmit = (e) => {
     e.preventDefault()
-    if(!task || !time) {
-      alert("Oops! All fields are required")
+    if (update) {
+      dispatch(editTask({id: updatedTask.id, data:{...updatedTask, task, time,}}))
     }
-    else {
+    else{
       dispatch(addTask({task, time, iscomplete: false, id:Math.random()}))
     }
+    
   }
 
   return (
@@ -22,9 +23,13 @@ const TodoForm = () => {
         <h1 style={{textAlign: "center"}}>Add Task</h1>
         <form action="" className='form'>
             <label htmlFor="">Task</label>
-            <input onChange={(e) => setTask(e.target.value)} type="text" placeholder='enter a task name' />
+            <input 
+            defaultValue={updatedTask?.task}
+            onChange={(e) => setTask(e.target.value)} type="text" placeholder='enter a task name' />
             <label htmlFor="">Time</label>
-            <input onChange={(e) => setTime(e.target.value)} type="time" placeholder='Schedule Time' />
+            <input 
+            defaultValue={updatedTask?.time}
+             onChange={(e) => setTime(e.target.value)} type="text" placeholder='Schedule Time' />
             <button onClick={handlesubmit} style={{width: '20%'}}>Submit</button>
         </form>
     </div>
